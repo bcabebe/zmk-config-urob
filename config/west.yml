@@ -18,12 +18,12 @@
 ---
 manifest:
   defaults:
-    remote: urob
+    remote: bcabebe
     # revision: v0.3 # Pin ZMK version
 
   remotes:
-    - name: urob
-      url-base: https://github.com/urob
+    - name: bcabebe
+      url-base: https://github.com/bcabebe
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
 
