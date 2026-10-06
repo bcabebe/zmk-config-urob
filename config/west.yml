@@ -54,8 +54,11 @@ manifest:
     - name: zmk-unicode
       path: modules/zmk/unicode
       revision: 1a6dbc797a46c4a61c3c71a7a9d013a5d5aee49e # main (4/19/2026)
+
+    # modules added by BCabebe
     - name: zmk-switch-layout
       remote: mctechnology17
+      path: modules/zmk-switch-layout
       revision: main
 
     # Only source necessary Zephyr modules. Remove this entire section to restore
