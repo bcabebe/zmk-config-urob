@@ -1,0 +1,6 @@
+if SHIELD_CS42_DUAL_NNV2
+
+config ZMK_KEYBOARD_NAME
+	default "CS42-DUAL-NNV2"
+
+endif

@@ -1,0 +1,2 @@
+config SHIELD_CS42_DUAL_AFF
+	def_bool $(shields_list_contains,cs42_dual_aff)

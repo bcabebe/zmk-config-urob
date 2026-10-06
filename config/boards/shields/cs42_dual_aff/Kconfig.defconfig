@@ -1,0 +1,6 @@
+if SHIELD_CS42_DUAL_AFF
+
+config ZMK_KEYBOARD_NAME
+	default "CS42-DUAL-AFF"
+
+endif

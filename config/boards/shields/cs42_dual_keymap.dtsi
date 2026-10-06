@@ -1,0 +1,454 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/reset.h>
+#include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk-switch-layout/switch-layout.h>
+
+
+#define DEFAULT 0       // qwerty layout
+#define NAV     1       // arrows, del, backspace, brackets
+#define NUMBS   2       // number keys, punctuation, brackets
+#define FKEYS   3       // function keys
+#define BTR     4       // bluetooth and reset
+#define LMOD    5       // modifier keys and combinations
+
+/ {
+    
+    behaviors {
+        hrm: home_row_mod {
+            compatible = "zmk,behavior-hold-tap";
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;    // produces hold if held longer than tapping-term-ms, default is 200 ms
+            #quick-tap-ms = <200>;
+            #global-quick-tap;
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+        }; // hrm
+        sw_layout: switch_layout {
+            compatible = "zmk-switch-layout,behavior-switch-layout-mode";
+            #binding-cells = <1>;
+            layout-count = <2>;         // 0 is mac, 1 is windows
+            default-layout = <0>;
+        };
+        sl_cut: switch_layout_cut {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&kp LG(X)>, <&kp LC(X)>;
+        };
+        sl_copy: switch_layout_copy {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&kp LG(C)>, <&kp LC(C)>;
+        };
+        sl_paste: switch_layout_paste {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&kp LG(V)>, <&kp LC(V)>;
+        };
+        sl_undo: switch_layout_undo {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&kp LG(Z)>, <&kp LC(Z)>;
+        };
+        sl_redo: switch_layout_redo {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&kp LG(Y)>, <&kp LC(Y)>;
+        };
+        sl_lkscrn: switch_layout_lock_screen {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&kp LG(LC(Q))>, <&kp LG(L)>;
+        };
+        sl_lc2g: switch_layout_left_c2g {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&kp LCTRL>, <&kp LGUI>;
+        };
+        sl_lg2c: switch_layout_left_g2c {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&kp LGUI>, <&kp LCTRL>;
+        };
+        //sl_rc2g: switch_layout_right_c2g {
+        //    compatible = "zmk-switch-layout,behavior-switch-layout-key";
+        //    #binding-cells = <0>;
+        //    bindings = <&kp RCTRL>, <&kp RGUI>;
+        //};
+        //sl_rg2c: switch_layout_right_g2c {
+        //    compatible = "zmk-switch-layout,behavior-switch-layout-key";
+        //    #binding-cells = <0>;
+        //    bindings = <&kp RGUI>, <&kp RCTRL>;
+        //};
+        sl_home: switch_layout_home {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&kp LG(LEFT)>, <&kp HOME>;
+        };
+        sl_end: switch_layout_end {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&kp LG(RIGHT)>, <&kp END>;
+        };
+        sl_insert: switch_layout_insert {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&kp LG(LA(O))>, <&kp INSERT>;
+        };
+        //sl_os_lc2g: switch_layout_one_shot_lc2g {
+        //    compatible = "zmk-switch-layout,behavior-switch-layout-key";
+        //    #binding-cells = <0>;
+        //    bindings = <&sk LCTRL>, <&sk LGUI>;
+        //};
+        //sl_os_lg2c: switch_layout_one_shot_lg2c {
+        //    compatible = "zmk-switch-layout,behavior-switch-layout-key";
+        //    #binding-cells = <0>;
+        //    bindings = <&sk LGUI>, <&sk LCTRL>;
+        //};
+        //sl_os_rc2g: switch_layout_one_shot_rc2g {
+        //    compatible = "zmk-switch-layout,behavior-switch-layout-key";
+        //    #binding-cells = <0>;
+        //    bindings = <&sk RCTRL>, <&sk RGUI>;
+        //};
+        //sl_os_rg2c: switch_layout_one_shot_rg2c {
+        //    compatible = "zmk-switch-layout,behavior-switch-layout-key";
+        //    #binding-cells = <0>;
+        //    bindings = <&sk RGUI>, <&sk RCTRL>;
+        //};
+        //sl_g2ctab: switch_layout_g2c_tab {
+        //    compatible = "zmk-switch-layout,behavior-switch-layout-key";
+        //    #binding-cells = <0>;
+        //    bindings = <&kp LG(TAB)>, <&kp LC(TAB)>;
+        //};
+        sl_t_g2a: switch_layout_tog_g2a {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&kt LGUI>, <&kt LALT>;
+        };
+        sl_hrmg2cz: switch_layout_hrm_g2c_z {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&hrm LGUI Z>, <&hrm LCTRL Z>;
+        };
+        sl_g2ct: switch_layout_g2c_t {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&kp RG(T)>, <&kp RC(T)>;
+        };
+        sl_g2cn: switch_layout_g2c_n {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&kp RG(N)>, <&kp RC(N)>;
+        };
+        sl_g2cu: switch_layout_g2c_u {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&kp RG(U)>, <&kp RC(U)>;
+        };
+        sl_g2cf: switch_layout_g2c_f {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&kp RG(F)>, <&kp RC(F)>;
+        };
+        sl_g2cb: switch_layout_g2c_b {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&kp RG(B)>, <&kp RC(B)>;
+        };
+        sl_g2cp: switch_layout_g2c_p {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&kp RG(P)>, <&kp RC(P)>;
+        };
+        sl_g2ca: switch_layout_g2c_a {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&kp RG(A)>, <&kp RC(A)>;
+        };
+        sl_ltg2cf2: switch_layout_lt_g2c_f2 {
+            compatible = "zmk-switch-layout,behavior-switch-layout-key";
+            #binding-cells = <0>;
+            bindings = <&lt LMOD LG(F2)>, <&lt LMOD LC(F2)>;
+        };
+        td_sl: tap_dance_switch_layout {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <300>;
+            bindings = <&sw_layout 0>, <&sw_layout 1>;
+        };
+    }; // behaviors
+
+    combos {
+        compatible = "zmk,combos";
+        // q & w -> ~
+        combo_tilde {
+            timeout-ms = <50>;
+            key-positions = <1 2>;
+            bindings = <&kp TILDE>;
+        };
+        // r & t -> +
+        combo_plus_l {
+            timeout-ms = <50>;
+            key-positions = <4 5>;
+            bindings = <&kp PLUS>;
+        };
+        // y & u -> -
+        combo_minus {
+            timeout-ms = <50>;
+            key-positions = <6 7>;
+            bindings = <&kp MINUS>;
+        };
+        // o & p -> `
+        combo_grave {
+            timeout-ms = <50>;
+            key-positions = <9 10>;
+            bindings = <&kp GRAVE>;
+        };
+        // f & g -> =
+        combo_equal_l {
+            timeout-ms = <50>;
+            key-positions = <16 17>;
+            bindings = <&kp EQUAL>;
+        };
+        // h & j -> _
+        combo_under {
+            timeout-ms = <50>;
+            key-positions = <18 19>;
+            bindings = <&kp UNDER>;
+        };
+        // z & x -> |
+        combo_pipe {
+            timeout-ms = <50>;
+            key-positions = <25 26>;
+            bindings = <&kp PIPE>;
+        };
+        // x & c -> /
+        combo_slash {
+            timeout-ms = <50>;
+            key-positions = <26 27>;
+            bindings = <&kp SLASH>;
+        };
+        // c & v -> 
+        combo_backslash {
+            timeout-ms = <50>;
+            key-positions = <27 28>;
+            bindings = <&kp BSLH>;
+        };
+        // n & m -> =
+        combo_equal_r {
+            timeout-ms = <50>;
+            key-positions = <30 31>;
+            bindings = <&kp EQUAL>;
+        };
+        // m & , -> +
+        combo_plus_r {
+            timeout-ms = <50>;
+            key-positions = <31 32>;
+            bindings = <&kp PLUS>;
+        };
+        // , & . -> =
+        //combo_equal_r {
+        //    timeout-ms = <50>;
+        //    key-positions = <32 33>;
+        //    bindings = <&kp EQUAL>;
+        //};
+        // . & / -> '
+        combo_apostrophe {
+            timeout-ms = <50>;
+            key-positions = <33 34>;
+            bindings = <&kp APOSTROPHE>;
+        };
+    };
+
+    macros {
+        m_bt1_win: macro_bt_0_layout_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&bt BT_SEL 0>
+                , <&sw_layout 1>
+                ;
+        };
+        m_bt2_mac: macro_bt_1_layout_mac {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&bt BT_SEL 1>
+                , <&sw_layout 0>
+                ;
+        };
+        m_bt3_win: macro_bt_2_layout_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&bt BT_SEL 2>
+                , <&sw_layout 1>
+                ;
+        };
+        m_bt4_win: macro_bt_3_layout_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&bt BT_SEL 3>
+                , <&sw_layout 1>
+                ;
+        };
+        m_bt5_mac: macro_bt_4_layout_mac {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&bt BT_SEL 4>
+                , <&sw_layout 0>
+                ;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+// kA1, kB1, kC1, kD1, kE1, kF1,           kG1, kH1, kI1, kJ1, kK1, kL1
+// kA2, kB2, kC2, kD2, kE2, kF2,           kG2, kH2, kI2, kJ2, kK2, kL2
+// kA3, kB3, kC3, kD3, kE3, kF3,           kG3, kH3, kI3, kJ3, kK3, kL3
+//                     kE4, kF4, kA4, kN4, kG4, kH4,                   
+        default_layer {
+//                       ,------.                DEFAULT 0                 ,------.
+//                ,------+   e  +-------------.              ,-------------+   i  +------.              
+//  ,-------------+   w  +------+   r  |   t  |              |   y  |   u  +------+   o  +-------------.
+//  | Esc  |   q  +------+   d  +------+------|              |------+------+   k  +------+   p  |td_sl |
+//  |------+------+   s  +------+   f  |   g  |              |   h  |   j  +------+   l  +------+------|
+//  | Tab  |   a  +------+   c  +------+------|              |------+------+   ,  +------+   ;  |   '  |
+//  |------+------+   x  +------+   v  |   b  |              |   n  |   m  +------+   .  +------+------|
+//  | Shift|   z  +------'      `-------------'              `-------------'      `------+   /  | Shift|
+//  `-------------'             ,--------------------.,--------------------.             `-------------'
+//                              |slg2cF2| Spc | Enter|| Enter|  Spc |  F2  |
+//                              `--------------------'`--------------------'
+//
+//                       ,------.                DEFAULT 0                 ,------.
+//                ,------+   E  +-------------.              ,-------------+   I  +------.              
+//  ,-------------+   W  +------+   R  |   T  |              |   Y  |   U  +------+   O  +-------------.
+//  |      |   Q  +------+   D  +------+------|              |------+------+   K  +------+   P  |      |
+//  |------+------+   S  +------+   F  |   G  |              |   H  |   J  +------+   L  +------+------|
+//  |      |   A  +------+   C  +------+------|              |------+------+   <  +------+   :  |   "  |
+//  |------+------+   X  +------+   V  |   B  |              |   N  |   M  +------+   >  +------+------|
+//  |      |   Z  +------'      `-------------'              `-------------'      `------+   ?  |      |
+//  `-------------'             ,--------------------.,--------------------.             `-------------'
+//                              |  LY5 |  LY2 | Shift|| Shift|  LY1 |  LY3 |
+//                              `--------------------'`--------------------'
+            bindings = <
+        &kp ESC   &kp Q        &kp W  &kp E        &kp R         &kp T                                      &kp Y        &kp U         &kp I            &kp O              &kp P     &td_sl  
+        &kp TAB   &kp A        &kp S  &kp D        &kp F         &kp G                                      &kp H        &kp J         &kp K            &kp L              &kp SEMI  &kp SQT 
+        &kp LSFT  &sl_hrmg2cz  &kp X  &hrm LALT C  &hrm LCTRL V  &kp B                                      &kp N        &hrm RCTRL M  &hrm RALT COMMA  &hrm RC(RALT) DOT  &kp FSLH  &kp RSFT
+                                                   &sl_ltg2cf2   &lt NUMBS SPC  &mt LSFT RET  &mt RSFT RET  &lt NAV SPC  &lt FKEYS F2                                                        
+            >;
+        };
+        
+        navigation_layer {
+//                       ,------.                NAV     1                 ,------.
+//                ,------+ Copy +-------------.              ,-------------+ CapWd+------.              
+//  ,-------------+ Cut  +------+ Pste |sl_ins|              |sl_re |  Del +------+ Bksp +-------------.
+//  | .... |      +------+ LALT +------+------|              |------+------+  Up  +------+ PgUp | .... |
+//  |------+------+sl_c2g+------+sl_g2c| ]  } |              |  <-  |  Dn  +------+  ->  +------+------|
+//  | .... | [  { +------+sl_cpy+------+------|              |------+------+ CapLk+------+ PgDn |      |
+//  |------+------+sl_cut+------+sl_pst|sl_re |              |      |sl_hom+------+sl_end+------+------|
+//  | .... |sl_un +------'      `-------------'              `-------------'      `------+ \  | | .... |
+//  `-------------'             ,--------------------.,--------------------.             `-------------'
+//                              |      |  Spc | .... || .... |> LY1<|      |
+//                              `--------------------'`--------------------'
+// Cut = Left_Shift + Delete    &kp LS(DEL)
+// Copy = Left_Ctrl + Insert    &kp LC(INS)
+// Paste = Left_Shift + Insert  &kp LS(INS)
+            bindings = <
+        &trans  &none     &kp LS(DEL)  &kp LC(INS)  &kp LS(INS)  &sl_insert                  &sl_redo  &kp DEL   &caps_word  &kp BKSP   &kp PG_UP  &trans
+        &trans  &kp LBKT  &sl_lc2g     &kp LALT     &sl_lg2c     &kp RBKT                    &kp LEFT  &kp DOWN  &kp UP      &kp RIGHT  &kp PG_DN  &none 
+        &trans  &sl_undo  &sl_cut      &sl_copy     &sl_paste    &sl_redo                    &none     &sl_home  &kp CAPS    &sl_end    &kp BSLH   &trans
+                                                    &none        &kp SPC     &trans  &trans  &trans    &none                                             
+            >;
+        };
+
+        numbers_layer {
+//                       ,------.                NUMBS   2                 ,------.
+//                ,------+   #  +-------------.              ,-------------+   *  +------.       
+//  ,-------------+   @  +------+   $  |   %  |              |   ^  |   &  +------+   (  +-------------.
+//  | `  ~ |   !  +------+ 3  # +------+------|              |------+------+ 8  * +------+   )  |   ~  |
+//  |------+------+ 2  @ +------+ 4  $ | 5  % |              | 6  ^ | 7  & +------+ 9  ( +------+------|
+//  | .... | 1  ! +------+ LALT +------+------|              |------+------+ RALT +------+ 0  ) | .... |
+//  |------+------+ LGUI +------+ LCTL | ]  } |              |      | RCTL +------+ RGUI +------+------|
+//  | .... | [  { +------'      `-------------'              `-------------'      `------+      | .... |
+//  `-------------'             ,--------------------.,--------------------.             `-------------'
+//                              |      |> LY2<| .... || .... |  Spc |      |
+//                              `--------------------'`--------------------'
+            bindings = <
+        &kp GRAVE  &kp EXCL  &kp AT    &kp HASH  &kp DLLR   &kp PRCNT                  &kp CARET  &kp AMPS   &kp STAR  &kp LPAR  &kp RPAR  &kp TILDE
+        &trans     &kp N1    &kp N2    &kp N3    &kp N4     &kp N5                     &kp N6     &kp N7     &kp N8    &kp N9    &kp N0    &trans   
+        &trans     &kp LBKT  &kp LGUI  &kp LALT  &kp LCTRL  &kp RBKT                   &none      &kp RCTRL  &kp RALT  &kp RGUI  &none     &trans   
+                                                 &none      &trans     &trans  &trans  &kp SPC    &none                                             
+            >;
+        };
+
+        function_layer {
+//                       ,------.                FKEYS   3                 ,------.
+//                ,------+ Pause+-------------.              ,-------------+sl_cpy+------.       
+//  ,-------------+  F12 +------+      | ScrLk|              | PrtSc|sl_pst+------+sl_cut +-------------.
+//  | .... |  F11 +------+  F3  +------+------|              |------+------+  F8  +------+      | .... |
+//  |------+------+  F2  +------+  F4  |  F5  |              |   F6 |  F7  +------+  F9  +------+------|
+//  | .... |  F1  +------+(LALT)+------+------|              |------+------+(RALT)+------+  F10 |      |
+//  |------+------+(LGUI)+------+(LCTL)|sl_re |              |sl_re |(RCTL)+------+(RGUI)+------+------|
+//  | .... |sl_un +------'      `-------------'              `-------------'      `------+sl_un | .... |
+//  `-------------'             ,--------------------.,--------------------.             `-------------'
+//                              |  LY4 | Spc  | .... || .... |      |> LY3<|
+//                              `--------------------'`--------------------'
+            bindings = <
+        &trans  &kp F11   &kp F12   &kp PAUSE_BREAK  &none      &kp SLCK                  &kp PSCRN  &sl_paste  &sl_copy   &sl_cut   &none     &trans
+        &trans  &kp F1    &kp F2    &kp F3           &kp F4     &kp F5                    &kp F6     &kp F7     &kp F8     &kp F9    &kp F10   &none 
+        &trans  &sl_undo  &sk LGUI  &sk LALT         &sk LCTRL  &sl_redo                  &sl_redo   &sk RCTRL  &sk RALT   &sk RGUI  &sl_undo  &trans
+                                                     &mo BTR    &kp SPC   &trans  &trans  &none      &trans                                          
+            >;
+        };
+
+        bt_reset_layer {
+//                       ,------.                BTR     4                 ,------.
+//                ,------+BT5_L0+-------------.              ,-------------+  BT5 +------.              
+//  ,-------------+BT4_L1+------+      |      |              | OutBT|  BT4 +------+      +-------------.
+//  | .... |swl_Df+------+BT2_L0+------+------|              |------+------+  BT2 +------+ BTCLR| .... |
+//  |------+------+BT1_L1+------+BT3_L1|      |              | OutTg|  BT1 +------+  BT3 +------+------|
+//  | .... |swl Nx+------+swl 1 +------+------|              |------+------+  BT+ +------+      |      |
+//  |------+------+swl 0 +------+      |      |              | OutUs|  BT- +------+      +------+------|
+//  | .... |swl Pv+------'      `-------------'              `-------------'      `------+ Reset| .... |
+//  `-------------'             ,--------------------.,--------------------.             `-------------'
+//                              |> LY4<|      |      ||      |      |> LY3<|
+//                              `--------------------'`--------------------'
+            bindings = <
+        &trans  &sw_layout ZMK_SWITCH_LAYOUT_DEFAULT  &m_bt4_win    &m_bt5_mac    &none       &none                &out OUT_BLE  &bt BT_SEL 3  &bt BT_SEL 4  &none         &bt BT_CLR  &trans
+        &trans  &sw_layout ZMK_SWITCH_LAYOUT_NEXT     &m_bt1_win    &m_bt2_mac    &m_bt3_win  &none                &out OUT_TOG  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &none       &none 
+        &trans  &sw_layout ZMK_SWITCH_LAYOUT_PREV     &sw_layout 0  &sw_layout 1  &none       &none                &out OUT_USB  &bt BT_PRV    &bt BT_NXT    &none         &sys_reset  &trans
+                                                                                  &trans      &none  &none  &none  &none         &trans                                                      
+            >;
+        };
+
+        modifiers_layer {
+//                       ,------.                LMOD    5                 ,------.
+//                ,------+ Copy +-------------.              ,-------------+      +------.       
+//  ,-------------+ Cut  +------+ Pste | Time |              |sl_gct|sl_gcu+------+      +-------------.
+//  | .... | Date +------+ LALT +------+------|              |------+------+      +------+sl_gcp| .... |
+//  |------+------+ LGUI +------+ LCTL |  DEL |              |      |sl_gcf+------+sl_lck+------+------|
+//  |sltg2a| Bksp +------+sl_cpy+------+------|              |------+------+      +------+sl_gca|      |
+//  |------+------+sl_cut+------+sl_pst|sl_re |              |sl_gcn|sl_gcb+------+      +------+------|
+//  | .... |sl_un +------'      `-------------'              `-------------'      `------+      | .... |
+//  `-------------'             ,--------------------.,--------------------.             `-------------'
+//                              |> LY5<|  Spc | .... || .... |  Spc |      |
+//                              `--------------------'`--------------------'
+// Cut = Left_Shift + Delete          &kp LS(DEL)
+// Copy = Left_Ctrl + Insert          &kp LC(INS)
+// Paste = Left_Shift + Insert        &kp LS(INS)
+// Date = Left_Alt + Left_shift + T   &kp LA(LS(T))
+// Time = Left_Ctrl + Left_Shift + T  &kp LC(LS(T))
+            bindings = <
+        &trans     &kp LA(LS(T))  &kp LS(DEL)  &kp LC(INS)  &kp LS(INS)  &kp LC(LS(T))                  &sl_g2ct  &sl_g2cu  &none   &none       &sl_g2cp  &trans
+        &sl_t_g2a  &kp BKSP       &kp LGUI     &kp LALT     &kp LCTRL    &kp DEL                        &none     &sl_g2cf  &none   &sl_lkscrn  &sl_g2ca  &none 
+        &trans     &sl_undo       &sl_cut      &sl_copy     &sl_paste    &sl_redo                       &sl_g2cn  &sl_g2cb  &none   &none       &none     &trans
+                                                            &trans       &kp SPC        &trans  &trans  &kp SPC   &none                                         
+            >;
+        };
+    };
+};

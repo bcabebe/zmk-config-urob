@@ -11,6 +11,16 @@
 #   - board: nice_nano_v2
 #     shield: reviung41
 #
+
+# from bmc zmk-config
+#  - board: sparkfun_pro_nrf52840_mini
+#    shield: cs42_dual_sfpm
+#  - board: sparkfun_pro_nrf52840_mini
+#    shield: cs42_dual_sfpm_b
+#  - board: adafruit_feather_nrf52840
+#    shield: cs42_dual_aff
+#  - board: nice_nano_v2
+#    shield: cs42_dual_nnv2
 ---
 include:
   - board: planck@6.0.0//zmk
@@ -18,3 +28,8 @@ include:
   - board: corneish_zen_right@2.0.0//zmk
   - board: glove80_lh
   - board: glove80_rh
+  - board: nice_nano@2.0.0
+    shield: cs42_dual_nnv2
+  - board: adafruit_feather_nrf52840
+    shield: cs42_dual_aff
+
