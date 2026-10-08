@@ -32,4 +32,8 @@ include:
     shield: cs42_dual_nnv2
   - board: adafruit_feather_nrf52840/nrf52840/uf2
     shield: cs42_dual_aff
+  - board: nice_nano@2.0.0
+    shield: settings_reset
+  - board: adafruit_feather_nrf52840/nrf52840/uf2
+    shield: settings_reset
 
